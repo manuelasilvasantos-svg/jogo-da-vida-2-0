@@ -1,0 +1,25 @@
+# Jogo da Vida 2.0 — Minha Jornada da Aprendizagem
+
+Versão para publicação no GitHub Pages (arquivos preparados, publicação ainda não realizada).
+
+## Publicar sem mexer no jogo antigo
+
+1. Acesse https://github.com/new e crie um repositório **público** com nome `jogo-da-vida-2-0`.
+2. Na página do repositório, clique em **Add file → Upload files**.
+3. Envie **somente o arquivo `index.html` desta pasta** e clique em **Commit changes**.
+4. Acesse **Settings → Pages**. Em **Build and deployment**, escolha **Deploy from a branch**; Branch **main** e folder **/(root)**. Salve.
+5. Depois da publicação, o endereço esperado será:
+   https://manuelasilvasantos-svg.github.io/jogo-da-vida-2-0/
+   (só funcionará após o GitHub Pages concluir a publicação).
+
+## O que testar antes de liberar
+
+- Abrir no computador e no celular.
+- Completar com nome fictício, turma e bimestre; verificar personagens, 10 perguntas, mensagens não repetidas, mapa e arquivo PDF.
+- Confirmar a gravação por ID na aba **Respostas**, sem duplicatas ao clicar em reenviar.
+- Simular participações simultâneas em vários dispositivos antes de usar com alunos.
+- Apagar APENAS as linhas fictícias, identificadas por nome/ID, e não apagar cabeçalho ou outras respostas.
+
+## Privacidade e segurança
+
+O HTML é público e contém o endereço do Apps Script, não uma credencial. Como a implantação aceita envios sem login, terceiros podem submeter respostas falsas e a planilha pode receber dados indevidos. Não considere os nomes como identidade autenticada. Antes de usar dados pessoais de crianças, alinhe regras de acesso, retenção e consentimento com a escola. O teste anterior confirma uma participação; não comprova concorrência com 40 alunos ou segurança de produção.
