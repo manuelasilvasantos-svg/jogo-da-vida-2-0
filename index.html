@@ -166,24 +166,31 @@ function eaqStatus(id){return new Promise(resolve=>{
 function novoID(){return 'EAQ-'+(window.crypto?.randomUUID?.()||Date.now()+'-'+Math.random().toString(36).slice(2,12))}
 // Formulario tradicional em iframe: evita depender do fetch no-cors no Safari/iPhone.
 // O retorno do POST nao e lido (origens diferentes); o registro e confirmado por consulta do ID.
-function eaqPostFormulario(id,dados){
- return new Promise(resolve=>{
-  const iframe=document.createElement('iframe');
-  iframe.name='eaq_envio_'+Date.now()+'_'+Math.floor(Math.random()*1e5);
-  iframe.style.cssText='display:none;width:0;height:0;border:0';
-  iframe.setAttribute('aria-hidden','true');
-  const form=document.createElement('form');
-  form.method='POST';form.action=EAQ_WEBAPP_URL;form.target=iframe.name;
-  form.style.display='none';form.acceptCharset='UTF-8';
-  for(const [key,value] of [['id',id],['payload',JSON.stringify(dados)]]){
-   const field=document.createElement('input');field.type='hidden';field.name=key;field.value=value;form.appendChild(field);
+
+async function eaqPostFormulario(id, dados) {
+  try {
+    const corpo = new URLSearchParams();
+
+    corpo.set('id', id);
+    corpo.set('payload', JSON.stringify(dados));
+
+    await fetch(EAQ_WEBAPP_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      credentials: 'omit',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+      },
+      body: corpo
+    });
+
+    return true;
+  } catch (erro) {
+    console.error('Falha no envio:', erro);
+    return false;
   }
-  document.body.appendChild(iframe);document.body.appendChild(form);
-  try{form.submit();resolve(true)}catch(err){resolve(false)}
-  // Deixa o iframe tempo suficiente para a rede completar antes de limpar.
-  setTimeout(()=>{form.remove();iframe.remove()},24000);
- });
 }
+
 async function enviarRegistro(){
  if(envioEmAndamento)return;
  if(!EAQ_WEBAPP_URL){statusRegistro('⚠️ Conexão ainda não configurada. Baixe o PDF e avise a escola.');return}
