@@ -204,7 +204,16 @@ async function enviarRegistro(){
    if(inicial.modoTeste===true){statusRegistro('🧪 O Apps Script está em modo de teste. Nada foi registrado.');return}
    if(inicial.ok!==true){statusRegistro('⚠️ O serviço da escola informou erro. Avise a orientação.');return}
    if(inicial.recebido===true){statusRegistro('✅ Respostas confirmadas na planilha da escola.');return}
-   const dados={nome,turma,bimestre,personagem:hero+1,respostas:ans.slice(),notaFinal:Number(nota.replace(',','.')),compromisso:commit};
+
+const dados = {
+  nome: name,
+  turma: turma,
+  bimestre: bimestre,
+  personagem: hero + 1,
+  respostas: ans.slice(),
+  notaFinal: Number(nota.replace(',', '.')),
+  compromisso: commit
+};
    for(let attempt=1;attempt<=3;attempt++){
       statusRegistro('🔄 Enviando participação ('+attempt+'/3). Aguarde a confirmação...');
       await eaqPostFormulario(participacaoId,dados);
