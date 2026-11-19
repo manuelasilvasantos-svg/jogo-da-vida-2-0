@@ -217,7 +217,18 @@ async function enviarRegistro(){
       }
    }
    statusRegistro('⚠️ Registro não confirmado. Baixe o PDF e tente reenviar. Se persistir, avise a orientação.');
- }finally{envioEmAndamento=false;if(retry)retry.disabled=false}
+
+  } catch (erro) {
+    console.error('Erro na integração:', erro);
+    statusRegistro(
+      '⚠️ Falha na conexão: ' +
+      (erro?.message || String(erro)) +
+      '. O registro não foi confirmado.'
+    );
+  } finally {
+    envioEmAndamento = false;
+    if (retry) retry.disabled = false;
+  }
 }
 
 
